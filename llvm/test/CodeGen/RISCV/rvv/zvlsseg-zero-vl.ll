@@ -46,6 +46,7 @@ define <vscale x 16 x i16> @test_vloxseg2_mask_nxv16i16_nxv16i16(ptr %base, <vsc
 ; CHECK-NEXT:    vsetivli zero, 0, e16, m4, ta, mu
 ; CHECK-NEXT:    vloxseg2ei16.v v12, (a0), v8
 ; CHECK-NEXT:    vloxseg2ei16.v v12, (a0), v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m4, ta, ma
 ; CHECK-NEXT:    vmv4r.v v8, v16
 ; CHECK-NEXT:    ret
 entry:
@@ -64,6 +65,7 @@ define <vscale x 16 x i16> @test_vluxseg2_mask_nxv16i16_nxv16i16(ptr %base, <vsc
 ; CHECK-NEXT:    vsetivli zero, 0, e16, m4, ta, mu
 ; CHECK-NEXT:    vluxseg2ei16.v v12, (a0), v8
 ; CHECK-NEXT:    vluxseg2ei16.v v12, (a0), v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m4, ta, ma
 ; CHECK-NEXT:    vmv4r.v v8, v16
 ; CHECK-NEXT:    ret
 entry:

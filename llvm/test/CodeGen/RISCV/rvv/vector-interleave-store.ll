@@ -9,6 +9,7 @@
 define void @vector_interleave_store_nxv32i1_nxv16i1(<vscale x 16 x i1> %a, <vscale x 16 x i1> %b, ptr %p) {
 ; CHECK-LABEL: vector_interleave_store_nxv32i1_nxv16i1:
 ; CHECK:       # %bb.0:
+; CHECK-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v9, v0
 ; CHECK-NEXT:    vmv1r.v v0, v8
 ; CHECK-NEXT:    vsetvli a1, zero, e8, m2, ta, ma
@@ -98,7 +99,7 @@ define void @vector_interleave_store_nxv16i64_nxv8i64(<vscale x 8 x i64> %a, <vs
 ; CHECK-LABEL: vector_interleave_store_nxv16i64_nxv8i64:
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    csrr a1, vlenb
-; CHECK-NEXT:    vsetvli a2, zero, e16, m2, ta, mu
+; CHECK-NEXT:    vsetvli a2, zero, e16, m2, ta, ma
 ; CHECK-NEXT:    vid.v v6
 ; CHECK-NEXT:    vmv8r.v v24, v8
 ; CHECK-NEXT:    srli a2, a1, 1
@@ -109,6 +110,7 @@ define void @vector_interleave_store_nxv16i64_nxv8i64(<vscale x 8 x i64> %a, <vs
 ; CHECK-NEXT:    slli a1, a1, 3
 ; CHECK-NEXT:    vmsne.vi v0, v10, 0
 ; CHECK-NEXT:    add a1, a0, a1
+; CHECK-NEXT:    vsetvli zero, zero, e16, m2, ta, mu
 ; CHECK-NEXT:    vadd.vx v8, v8, a2, v0.t
 ; CHECK-NEXT:    vsetvli zero, zero, e64, m8, ta, ma
 ; CHECK-NEXT:    vrgatherei16.vv v0, v24, v8

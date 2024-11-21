@@ -175,6 +175,7 @@ define <vscale x 8 x half> @vmerge_truelhs_nxv8f16_0(<vscale x 8 x half> %va, <v
 define <vscale x 8 x half> @vmerge_falselhs_nxv8f16_0(<vscale x 8 x half> %va, <vscale x 8 x half> %vb) {
 ; CHECK-LABEL: vmerge_falselhs_nxv8f16_0:
 ; CHECK:       # %bb.0:
+; CHECK-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv2r.v v8, v10
 ; CHECK-NEXT:    ret
   %vc = select <vscale x 8 x i1> zeroinitializer, <vscale x 8 x half> %va, <vscale x 8 x half> %vb
@@ -494,15 +495,18 @@ define <vscale x 16 x double> @vselect_combine_regression(<vscale x 16 x i64> %v
 ; CHECK-LABEL: vselect_combine_regression:
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    csrr a1, vlenb
-; CHECK-NEXT:    vsetvli a2, zero, e64, m8, ta, mu
+; CHECK-NEXT:    vsetvli a2, zero, e64, m8, ta, ma
 ; CHECK-NEXT:    vmseq.vi v24, v16, 0
 ; CHECK-NEXT:    vmseq.vi v0, v8, 0
 ; CHECK-NEXT:    vmv.v.i v16, 0
 ; CHECK-NEXT:    slli a1, a1, 3
 ; CHECK-NEXT:    vmv.v.i v8, 0
 ; CHECK-NEXT:    add a1, a0, a1
+; CHECK-NEXT:    vsetvli zero, zero, e64, m8, ta, mu
 ; CHECK-NEXT:    vle64.v v8, (a0), v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e64, m8, ta, ma
 ; CHECK-NEXT:    vmv1r.v v0, v24
+; CHECK-NEXT:    vsetvli zero, zero, e64, m8, ta, mu
 ; CHECK-NEXT:    vle64.v v16, (a1), v0.t
 ; CHECK-NEXT:    ret
   %cond = icmp eq <vscale x 16 x i64> %va, zeroinitializer

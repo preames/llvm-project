@@ -62,6 +62,7 @@ define <vscale x 1 x float> @vfmacc_vv_nxv1f32_tu(<vscale x 1 x half> %a, <vscal
 ; ZVFH:       # %bb.0:
 ; ZVFH-NEXT:    vsetvli zero, a0, e16, mf4, tu, mu
 ; ZVFH-NEXT:    vfwmacc.vv v10, v8, v9, v0.t
+; ZVFH-NEXT:    vsetvli zero, zero, e16, mf4, ta, ma
 ; ZVFH-NEXT:    vmv1r.v v8, v10
 ; ZVFH-NEXT:    ret
 ;
@@ -72,6 +73,7 @@ define <vscale x 1 x float> @vfmacc_vv_nxv1f32_tu(<vscale x 1 x half> %a, <vscal
 ; ZVFHMIN-NEXT:    vfwcvt.f.f.v v8, v9
 ; ZVFHMIN-NEXT:    vsetvli zero, zero, e32, mf2, tu, mu
 ; ZVFHMIN-NEXT:    vfmacc.vv v10, v11, v8, v0.t
+; ZVFHMIN-NEXT:    vsetvli zero, zero, e32, mf2, ta, ma
 ; ZVFHMIN-NEXT:    vmv1r.v v8, v10
 ; ZVFHMIN-NEXT:    ret
   %aext = call <vscale x 1 x float> @llvm.vp.fpext.nxv1f32.nxv1f16(<vscale x 1 x half> %a, <vscale x 1 x i1> splat (i1 -1), i32 %evl)
@@ -87,6 +89,7 @@ define <vscale x 1 x float> @vfmacc_vv_nxv1f32_masked__tu(<vscale x 1 x half> %a
 ; ZVFH:       # %bb.0:
 ; ZVFH-NEXT:    vsetvli zero, a0, e16, mf4, tu, mu
 ; ZVFH-NEXT:    vfwmacc.vv v10, v8, v9, v0.t
+; ZVFH-NEXT:    vsetvli zero, zero, e16, mf4, ta, ma
 ; ZVFH-NEXT:    vmv1r.v v8, v10
 ; ZVFH-NEXT:    ret
 ;
@@ -219,6 +222,7 @@ define <vscale x 1 x float> @vfmacc_vf_nxv1f32_tu(<vscale x 1 x half> %va, half 
 ; ZVFH:       # %bb.0:
 ; ZVFH-NEXT:    vsetvli zero, a0, e16, mf4, tu, mu
 ; ZVFH-NEXT:    vfwmacc.vf v9, fa0, v8, v0.t
+; ZVFH-NEXT:    vsetvli zero, zero, e16, mf4, ta, ma
 ; ZVFH-NEXT:    vmv1r.v v8, v9
 ; ZVFH-NEXT:    ret
 ;
@@ -232,6 +236,7 @@ define <vscale x 1 x float> @vfmacc_vf_nxv1f32_tu(<vscale x 1 x half> %va, half 
 ; ZVFHMIN-NEXT:    vfwcvt.f.f.v v8, v10
 ; ZVFHMIN-NEXT:    vsetvli zero, zero, e32, mf2, tu, mu
 ; ZVFHMIN-NEXT:    vfmacc.vv v9, v11, v8, v0.t
+; ZVFHMIN-NEXT:    vsetvli zero, zero, e32, mf2, ta, ma
 ; ZVFHMIN-NEXT:    vmv1r.v v8, v9
 ; ZVFHMIN-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x half> poison, half %b, i32 0
@@ -248,6 +253,7 @@ define <vscale x 1 x float> @vfmacc_vf_nxv1f32_commute_tu(<vscale x 1 x half> %v
 ; ZVFH:       # %bb.0:
 ; ZVFH-NEXT:    vsetvli zero, a0, e16, mf4, tu, mu
 ; ZVFH-NEXT:    vfwmacc.vf v9, fa0, v8, v0.t
+; ZVFH-NEXT:    vsetvli zero, zero, e16, mf4, ta, ma
 ; ZVFH-NEXT:    vmv1r.v v8, v9
 ; ZVFH-NEXT:    ret
 ;
@@ -261,6 +267,7 @@ define <vscale x 1 x float> @vfmacc_vf_nxv1f32_commute_tu(<vscale x 1 x half> %v
 ; ZVFHMIN-NEXT:    vfwcvt.f.f.v v8, v10
 ; ZVFHMIN-NEXT:    vsetvli zero, zero, e32, mf2, tu, mu
 ; ZVFHMIN-NEXT:    vfmacc.vv v9, v8, v11, v0.t
+; ZVFHMIN-NEXT:    vsetvli zero, zero, e32, mf2, ta, ma
 ; ZVFHMIN-NEXT:    vmv1r.v v8, v9
 ; ZVFHMIN-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x half> poison, half %b, i32 0

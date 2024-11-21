@@ -197,6 +197,7 @@ entry:
 define void @test_compresstore_v256i8(ptr %p, <256 x i1> %mask, <256 x i8> %data) {
 ; RV64-LABEL: test_compresstore_v256i8:
 ; RV64:       # %bb.0: # %entry
+; RV64-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; RV64-NEXT:    vmv1r.v v7, v8
 ; RV64-NEXT:    li a2, 128
 ; RV64-NEXT:    vsetivli zero, 1, e64, m1, ta, ma
@@ -204,7 +205,7 @@ define void @test_compresstore_v256i8(ptr %p, <256 x i1> %mask, <256 x i8> %data
 ; RV64-NEXT:    vmv.x.s a3, v0
 ; RV64-NEXT:    vsetvli zero, a2, e8, m8, ta, ma
 ; RV64-NEXT:    vle8.v v24, (a1)
-; RV64-NEXT:    vsetvli zero, a2, e64, m1, ta, ma
+; RV64-NEXT:    vsetvli zero, a2, e64, m8, ta, ma
 ; RV64-NEXT:    vmv.x.s a1, v9
 ; RV64-NEXT:    vsetvli zero, a2, e8, m8, ta, ma
 ; RV64-NEXT:    vcompress.vm v8, v16, v0
@@ -230,6 +231,7 @@ define void @test_compresstore_v256i8(ptr %p, <256 x i1> %mask, <256 x i8> %data
 ; RV32-NEXT:    slli a2, a2, 3
 ; RV32-NEXT:    sub sp, sp, a2
 ; RV32-NEXT:    .cfi_escape 0x0f, 0x0d, 0x72, 0x00, 0x11, 0x10, 0x22, 0x11, 0x08, 0x92, 0xa2, 0x38, 0x00, 0x1e, 0x22 # sp + 16 + 8 * vlenb
+; RV32-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; RV32-NEXT:    vmv8r.v v24, v16
 ; RV32-NEXT:    li a2, 128
 ; RV32-NEXT:    vsetivli zero, 1, e64, m1, ta, ma
@@ -248,7 +250,7 @@ define void @test_compresstore_v256i8(ptr %p, <256 x i1> %mask, <256 x i8> %data
 ; RV32-NEXT:    vcompress.vm v16, v24, v0
 ; RV32-NEXT:    vcpop.m a3, v0
 ; RV32-NEXT:    cpop a4, a4
-; RV32-NEXT:    vsetvli zero, a2, e64, m1, ta, ma
+; RV32-NEXT:    vsetvli zero, a2, e64, m8, ta, ma
 ; RV32-NEXT:    vmv.x.s a5, v10
 ; RV32-NEXT:    vmv.x.s a6, v9
 ; RV32-NEXT:    vsetvli zero, a3, e8, m8, ta, ma
@@ -457,7 +459,7 @@ define void @test_compresstore_v128i16(ptr %p, <128 x i1> %mask, <128 x i16> %da
 ; RV64-NEXT:    vse16.v v24, (a0)
 ; RV64-NEXT:    vsetivli zero, 8, e8, m1, ta, ma
 ; RV64-NEXT:    vslidedown.vi v8, v0, 8
-; RV64-NEXT:    vsetvli zero, zero, e64, m8, ta, ma
+; RV64-NEXT:    vsetivli zero, 8, e64, m1, ta, ma
 ; RV64-NEXT:    vmv.x.s a2, v0
 ; RV64-NEXT:    vsetvli zero, a1, e16, m8, ta, ma
 ; RV64-NEXT:    vcompress.vm v24, v16, v8
@@ -478,7 +480,7 @@ define void @test_compresstore_v128i16(ptr %p, <128 x i1> %mask, <128 x i16> %da
 ; RV32-NEXT:    vcompress.vm v24, v16, v7
 ; RV32-NEXT:    vcpop.m a2, v7
 ; RV32-NEXT:    li a3, 32
-; RV32-NEXT:    vsetvli zero, a1, e64, m1, ta, ma
+; RV32-NEXT:    vsetvli zero, a1, e64, m8, ta, ma
 ; RV32-NEXT:    vmv.x.s a4, v0
 ; RV32-NEXT:    vsetvli zero, a1, e16, m8, ta, ma
 ; RV32-NEXT:    vcompress.vm v16, v8, v0
@@ -487,7 +489,7 @@ define void @test_compresstore_v128i16(ptr %p, <128 x i1> %mask, <128 x i16> %da
 ; RV32-NEXT:    vsrl.vx v8, v0, a3
 ; RV32-NEXT:    vsetvli zero, a1, e16, m8, ta, ma
 ; RV32-NEXT:    vse16.v v16, (a0)
-; RV32-NEXT:    vsetvli zero, a1, e64, m1, ta, ma
+; RV32-NEXT:    vsetvli zero, a1, e64, m8, ta, ma
 ; RV32-NEXT:    vmv.x.s a1, v8
 ; RV32-NEXT:    cpop a1, a1
 ; RV32-NEXT:    cpop a3, a4
@@ -655,7 +657,7 @@ define void @test_compresstore_v64i32(ptr %p, <64 x i1> %mask, <64 x i32> %data)
 ; RV64-NEXT:    vse32.v v24, (a0)
 ; RV64-NEXT:    vsetivli zero, 4, e8, mf2, ta, ma
 ; RV64-NEXT:    vslidedown.vi v8, v0, 4
-; RV64-NEXT:    vsetvli zero, zero, e32, m2, ta, ma
+; RV64-NEXT:    vsetivli zero, 4, e32, mf2, ta, ma
 ; RV64-NEXT:    vmv.x.s a2, v0
 ; RV64-NEXT:    vsetvli zero, a1, e32, m8, ta, ma
 ; RV64-NEXT:    vcompress.vm v24, v16, v8
@@ -677,7 +679,7 @@ define void @test_compresstore_v64i32(ptr %p, <64 x i1> %mask, <64 x i32> %data)
 ; RV32-NEXT:    vse32.v v24, (a0)
 ; RV32-NEXT:    vsetivli zero, 4, e8, mf2, ta, ma
 ; RV32-NEXT:    vslidedown.vi v8, v0, 4
-; RV32-NEXT:    vsetvli zero, zero, e32, m2, ta, ma
+; RV32-NEXT:    vsetivli zero, 4, e32, mf2, ta, ma
 ; RV32-NEXT:    vmv.x.s a2, v0
 ; RV32-NEXT:    vsetvli zero, a1, e32, m8, ta, ma
 ; RV32-NEXT:    vcompress.vm v24, v16, v8
@@ -820,7 +822,7 @@ define void @test_compresstore_v32i64(ptr %p, <32 x i1> %mask, <32 x i64> %data)
 ; RV64-NEXT:    vse64.v v24, (a0)
 ; RV64-NEXT:    vsetivli zero, 2, e8, mf4, ta, ma
 ; RV64-NEXT:    vslidedown.vi v8, v0, 2
-; RV64-NEXT:    vsetvli zero, zero, e16, mf2, ta, ma
+; RV64-NEXT:    vsetivli zero, 2, e16, mf4, ta, ma
 ; RV64-NEXT:    vmv.x.s a1, v0
 ; RV64-NEXT:    vsetivli zero, 16, e64, m8, ta, ma
 ; RV64-NEXT:    vcompress.vm v24, v16, v8
@@ -842,7 +844,7 @@ define void @test_compresstore_v32i64(ptr %p, <32 x i1> %mask, <32 x i64> %data)
 ; RV32-NEXT:    vse64.v v24, (a0)
 ; RV32-NEXT:    vsetivli zero, 2, e8, mf4, ta, ma
 ; RV32-NEXT:    vslidedown.vi v8, v0, 2
-; RV32-NEXT:    vsetvli zero, zero, e16, mf2, ta, ma
+; RV32-NEXT:    vsetivli zero, 2, e16, mf4, ta, ma
 ; RV32-NEXT:    vmv.x.s a1, v0
 ; RV32-NEXT:    vsetivli zero, 16, e64, m8, ta, ma
 ; RV32-NEXT:    vcompress.vm v24, v16, v8

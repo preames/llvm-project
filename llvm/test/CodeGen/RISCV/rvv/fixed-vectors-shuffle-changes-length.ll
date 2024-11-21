@@ -88,6 +88,7 @@ define <4 x i32> @v4i32_v8i32(<8 x i32>) {
 ; CHECK-NEXT:    vslidedown.vi v8, v8, 4
 ; CHECK-NEXT:    vsetivli zero, 4, e32, m1, ta, mu
 ; CHECK-NEXT:    vslidedown.vi v10, v8, 1, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m1, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v10
 ; CHECK-NEXT:    ret
   %2 = shufflevector <8 x i32> %0, <8 x i32> poison, <4 x i32> <i32 5, i32 3, i32 7, i32 2>

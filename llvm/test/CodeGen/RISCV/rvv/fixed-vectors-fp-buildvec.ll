@@ -50,6 +50,7 @@ define <4 x float> @hang_when_merging_stores_after_legalization(<8 x float> %x, 
 ; CHECK-NEXT:    vadd.vi v8, v14, -14
 ; CHECK-NEXT:    vsetvli zero, zero, e32, m2, ta, mu
 ; CHECK-NEXT:    vrgatherei16.vv v12, v10, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v12
 ; CHECK-NEXT:    ret
   %z = shufflevector <8 x float> %x, <8 x float> %y, <4 x i32> <i32 0, i32 7, i32 8, i32 15>

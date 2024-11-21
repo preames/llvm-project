@@ -162,6 +162,7 @@ define <vscale x 2 x i32> @vmerge_smaller_vl_different_passthru(<vscale x 2 x i3
 ; CHECK-NEXT:    vsetivli zero, 2, e32, m1, tu, mu
 ; CHECK-NEXT:    vadd.vv v8, v10, v11, v0.t
 ; CHECK-NEXT:    vmv.v.v v9, v8
+; CHECK-NEXT:    vsetvli zero, zero, e32, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %a = call <vscale x 2 x i32> @llvm.riscv.vadd.mask.nxv2i32.nxv2i32(<vscale x 2 x i32> %pt1, <vscale x 2 x i32> %x, <vscale x 2 x i32> %y, <vscale x 2 x i1> %m, i64 3, i64 0)

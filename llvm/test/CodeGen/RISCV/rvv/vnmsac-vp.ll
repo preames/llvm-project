@@ -14,6 +14,7 @@ define <vscale x 1 x i8> @vnmsac_vv_nxv1i8(<vscale x 1 x i8> %a, <vscale x 1 x i
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf8, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 1 x i8> @llvm.vp.mul.nxv1i8(<vscale x 1 x i8> %a, <vscale x 1 x i8> %b, <vscale x 1 x i1> splat (i1 -1), i32 %evl)
@@ -40,6 +41,7 @@ define <vscale x 1 x i8> @vnmsac_vx_nxv1i8(<vscale x 1 x i8> %a, i8 %b, <vscale 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, mf8, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x i8> poison, i8 %b, i32 0
@@ -70,6 +72,7 @@ define <vscale x 1 x i8> @vnmsac_vv_nxv1i8_ta(<vscale x 1 x i8> %a, <vscale x 1 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf8, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 1 x i8> @llvm.vp.mul.nxv1i8(<vscale x 1 x i8> %a, <vscale x 1 x i8> %b, <vscale x 1 x i1> splat (i1 -1), i32 %evl)
@@ -83,6 +86,7 @@ define <vscale x 1 x i8> @vnmsac_vx_nxv1i8_ta(<vscale x 1 x i8> %a, i8 %b, <vsca
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, mf8, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x i8> poison, i8 %b, i32 0
@@ -103,6 +107,7 @@ define <vscale x 2 x i8> @vnmsac_vv_nxv2i8(<vscale x 2 x i8> %a, <vscale x 2 x i
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf4, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf4, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 2 x i8> @llvm.vp.mul.nxv2i8(<vscale x 2 x i8> %a, <vscale x 2 x i8> %b, <vscale x 2 x i1> splat (i1 -1), i32 %evl)
@@ -129,6 +134,7 @@ define <vscale x 2 x i8> @vnmsac_vx_nxv2i8(<vscale x 2 x i8> %a, i8 %b, <vscale 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, mf4, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf4, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 2 x i8> poison, i8 %b, i32 0
@@ -159,6 +165,7 @@ define <vscale x 2 x i8> @vnmsac_vv_nxv2i8_ta(<vscale x 2 x i8> %a, <vscale x 2 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf4, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf4, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 2 x i8> @llvm.vp.mul.nxv2i8(<vscale x 2 x i8> %a, <vscale x 2 x i8> %b, <vscale x 2 x i1> splat (i1 -1), i32 %evl)
@@ -172,6 +179,7 @@ define <vscale x 2 x i8> @vnmsac_vx_nxv2i8_ta(<vscale x 2 x i8> %a, i8 %b, <vsca
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, mf4, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf4, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 2 x i8> poison, i8 %b, i32 0
@@ -192,6 +200,7 @@ define <vscale x 4 x i8> @vnmsac_vv_nxv4i8(<vscale x 4 x i8> %a, <vscale x 4 x i
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf2, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 4 x i8> @llvm.vp.mul.nxv4i8(<vscale x 4 x i8> %a, <vscale x 4 x i8> %b, <vscale x 4 x i1> splat (i1 -1), i32 %evl)
@@ -218,6 +227,7 @@ define <vscale x 4 x i8> @vnmsac_vx_nxv4i8(<vscale x 4 x i8> %a, i8 %b, <vscale 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, mf2, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 4 x i8> poison, i8 %b, i32 0
@@ -248,6 +258,7 @@ define <vscale x 4 x i8> @vnmsac_vv_nxv4i8_ta(<vscale x 4 x i8> %a, <vscale x 4 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf2, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 4 x i8> @llvm.vp.mul.nxv4i8(<vscale x 4 x i8> %a, <vscale x 4 x i8> %b, <vscale x 4 x i1> splat (i1 -1), i32 %evl)
@@ -261,6 +272,7 @@ define <vscale x 4 x i8> @vnmsac_vx_nxv4i8_ta(<vscale x 4 x i8> %a, i8 %b, <vsca
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, mf2, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 4 x i8> poison, i8 %b, i32 0
@@ -281,6 +293,7 @@ define <vscale x 8 x i8> @vnmsac_vv_nxv8i8(<vscale x 8 x i8> %a, <vscale x 8 x i
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, m1, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 8 x i8> @llvm.vp.mul.nxv8i8(<vscale x 8 x i8> %a, <vscale x 8 x i8> %b, <vscale x 8 x i1> splat (i1 -1), i32 %evl)
@@ -307,6 +320,7 @@ define <vscale x 8 x i8> @vnmsac_vx_nxv8i8(<vscale x 8 x i8> %a, i8 %b, <vscale 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m1, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 8 x i8> poison, i8 %b, i32 0
@@ -337,6 +351,7 @@ define <vscale x 8 x i8> @vnmsac_vv_nxv8i8_ta(<vscale x 8 x i8> %a, <vscale x 8 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, m1, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 8 x i8> @llvm.vp.mul.nxv8i8(<vscale x 8 x i8> %a, <vscale x 8 x i8> %b, <vscale x 8 x i1> splat (i1 -1), i32 %evl)
@@ -350,6 +365,7 @@ define <vscale x 8 x i8> @vnmsac_vx_nxv8i8_ta(<vscale x 8 x i8> %a, i8 %b, <vsca
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m1, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 8 x i8> poison, i8 %b, i32 0
@@ -370,6 +386,7 @@ define <vscale x 16 x i8> @vnmsac_vv_nxv16i8(<vscale x 16 x i8> %a, <vscale x 16
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, m2, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v12, v8, v10, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m2, ta, ma
 ; CHECK-NEXT:    vmv2r.v v8, v12
 ; CHECK-NEXT:    ret
   %x = call <vscale x 16 x i8> @llvm.vp.mul.nxv16i8(<vscale x 16 x i8> %a, <vscale x 16 x i8> %b, <vscale x 16 x i1> splat (i1 -1), i32 %evl)
@@ -396,6 +413,7 @@ define <vscale x 16 x i8> @vnmsac_vx_nxv16i8(<vscale x 16 x i8> %a, i8 %b, <vsca
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m2, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v10, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m2, ta, ma
 ; CHECK-NEXT:    vmv2r.v v8, v10
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 16 x i8> poison, i8 %b, i32 0
@@ -426,6 +444,7 @@ define <vscale x 16 x i8> @vnmsac_vv_nxv16i8_ta(<vscale x 16 x i8> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, m2, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v12, v8, v10, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m2, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v12
 ; CHECK-NEXT:    ret
   %x = call <vscale x 16 x i8> @llvm.vp.mul.nxv16i8(<vscale x 16 x i8> %a, <vscale x 16 x i8> %b, <vscale x 16 x i1> splat (i1 -1), i32 %evl)
@@ -439,6 +458,7 @@ define <vscale x 16 x i8> @vnmsac_vx_nxv16i8_ta(<vscale x 16 x i8> %a, i8 %b, <v
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m2, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v10, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m2, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v10
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 16 x i8> poison, i8 %b, i32 0
@@ -459,6 +479,7 @@ define <vscale x 32 x i8> @vnmsac_vv_nxv32i8(<vscale x 32 x i8> %a, <vscale x 32
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, m4, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v16, v8, v12, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m4, ta, ma
 ; CHECK-NEXT:    vmv4r.v v8, v16
 ; CHECK-NEXT:    ret
   %x = call <vscale x 32 x i8> @llvm.vp.mul.nxv32i8(<vscale x 32 x i8> %a, <vscale x 32 x i8> %b, <vscale x 32 x i1> splat (i1 -1), i32 %evl)
@@ -485,6 +506,7 @@ define <vscale x 32 x i8> @vnmsac_vx_nxv32i8(<vscale x 32 x i8> %a, i8 %b, <vsca
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m4, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v12, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m4, ta, ma
 ; CHECK-NEXT:    vmv4r.v v8, v12
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 32 x i8> poison, i8 %b, i32 0
@@ -515,6 +537,7 @@ define <vscale x 32 x i8> @vnmsac_vv_nxv32i8_ta(<vscale x 32 x i8> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e8, m4, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v16, v8, v12, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m4, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v16
 ; CHECK-NEXT:    ret
   %x = call <vscale x 32 x i8> @llvm.vp.mul.nxv32i8(<vscale x 32 x i8> %a, <vscale x 32 x i8> %b, <vscale x 32 x i1> splat (i1 -1), i32 %evl)
@@ -528,6 +551,7 @@ define <vscale x 32 x i8> @vnmsac_vx_nxv32i8_ta(<vscale x 32 x i8> %a, i8 %b, <v
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m4, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v12, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m4, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v12
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 32 x i8> poison, i8 %b, i32 0
@@ -549,6 +573,7 @@ define <vscale x 64 x i8> @vnmsac_vv_nxv64i8(<vscale x 64 x i8> %a, <vscale x 64
 ; CHECK-NEXT:    vl8r.v v24, (a0)
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m8, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v24, v8, v16, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m8, ta, ma
 ; CHECK-NEXT:    vmv8r.v v8, v24
 ; CHECK-NEXT:    ret
   %x = call <vscale x 64 x i8> @llvm.vp.mul.nxv64i8(<vscale x 64 x i8> %a, <vscale x 64 x i8> %b, <vscale x 64 x i1> splat (i1 -1), i32 %evl)
@@ -576,6 +601,7 @@ define <vscale x 64 x i8> @vnmsac_vx_nxv64i8(<vscale x 64 x i8> %a, i8 %b, <vsca
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m8, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v16, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m8, ta, ma
 ; CHECK-NEXT:    vmv8r.v v8, v16
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 64 x i8> poison, i8 %b, i32 0
@@ -607,6 +633,7 @@ define <vscale x 64 x i8> @vnmsac_vv_nxv64i8_ta(<vscale x 64 x i8> %a, <vscale x
 ; CHECK-NEXT:    vl8r.v v24, (a0)
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m8, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v24, v8, v16, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m8, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v24
 ; CHECK-NEXT:    ret
   %x = call <vscale x 64 x i8> @llvm.vp.mul.nxv64i8(<vscale x 64 x i8> %a, <vscale x 64 x i8> %b, <vscale x 64 x i1> splat (i1 -1), i32 %evl)
@@ -620,6 +647,7 @@ define <vscale x 64 x i8> @vnmsac_vx_nxv64i8_ta(<vscale x 64 x i8> %a, i8 %b, <v
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e8, m8, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v16, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, m8, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v16
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 64 x i8> poison, i8 %b, i32 0
@@ -640,6 +668,7 @@ define <vscale x 1 x i16> @vnmsac_vv_nxv1i16(<vscale x 1 x i16> %a, <vscale x 1 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, mf4, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, mf4, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 1 x i16> @llvm.vp.mul.nxv1i16(<vscale x 1 x i16> %a, <vscale x 1 x i16> %b, <vscale x 1 x i1> splat (i1 -1), i32 %evl)
@@ -666,6 +695,7 @@ define <vscale x 1 x i16> @vnmsac_vx_nxv1i16(<vscale x 1 x i16> %a, i16 %b, <vsc
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, mf4, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, mf4, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x i16> poison, i16 %b, i32 0
@@ -696,6 +726,7 @@ define <vscale x 1 x i16> @vnmsac_vv_nxv1i16_ta(<vscale x 1 x i16> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, mf4, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, mf4, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 1 x i16> @llvm.vp.mul.nxv1i16(<vscale x 1 x i16> %a, <vscale x 1 x i16> %b, <vscale x 1 x i1> splat (i1 -1), i32 %evl)
@@ -709,6 +740,7 @@ define <vscale x 1 x i16> @vnmsac_vx_nxv1i16_ta(<vscale x 1 x i16> %a, i16 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, mf4, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, mf4, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x i16> poison, i16 %b, i32 0
@@ -729,6 +761,7 @@ define <vscale x 2 x i16> @vnmsac_vv_nxv2i16(<vscale x 2 x i16> %a, <vscale x 2 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, mf2, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 2 x i16> @llvm.vp.mul.nxv2i16(<vscale x 2 x i16> %a, <vscale x 2 x i16> %b, <vscale x 2 x i1> splat (i1 -1), i32 %evl)
@@ -755,6 +788,7 @@ define <vscale x 2 x i16> @vnmsac_vx_nxv2i16(<vscale x 2 x i16> %a, i16 %b, <vsc
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, mf2, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 2 x i16> poison, i16 %b, i32 0
@@ -785,6 +819,7 @@ define <vscale x 2 x i16> @vnmsac_vv_nxv2i16_ta(<vscale x 2 x i16> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, mf2, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 2 x i16> @llvm.vp.mul.nxv2i16(<vscale x 2 x i16> %a, <vscale x 2 x i16> %b, <vscale x 2 x i1> splat (i1 -1), i32 %evl)
@@ -798,6 +833,7 @@ define <vscale x 2 x i16> @vnmsac_vx_nxv2i16_ta(<vscale x 2 x i16> %a, i16 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, mf2, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 2 x i16> poison, i16 %b, i32 0
@@ -818,6 +854,7 @@ define <vscale x 4 x i16> @vnmsac_vv_nxv4i16(<vscale x 4 x i16> %a, <vscale x 4 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, m1, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 4 x i16> @llvm.vp.mul.nxv4i16(<vscale x 4 x i16> %a, <vscale x 4 x i16> %b, <vscale x 4 x i1> splat (i1 -1), i32 %evl)
@@ -844,6 +881,7 @@ define <vscale x 4 x i16> @vnmsac_vx_nxv4i16(<vscale x 4 x i16> %a, i16 %b, <vsc
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m1, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 4 x i16> poison, i16 %b, i32 0
@@ -874,6 +912,7 @@ define <vscale x 4 x i16> @vnmsac_vv_nxv4i16_ta(<vscale x 4 x i16> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, m1, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m1, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 4 x i16> @llvm.vp.mul.nxv4i16(<vscale x 4 x i16> %a, <vscale x 4 x i16> %b, <vscale x 4 x i1> splat (i1 -1), i32 %evl)
@@ -887,6 +926,7 @@ define <vscale x 4 x i16> @vnmsac_vx_nxv4i16_ta(<vscale x 4 x i16> %a, i16 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m1, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m1, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 4 x i16> poison, i16 %b, i32 0
@@ -907,6 +947,7 @@ define <vscale x 8 x i16> @vnmsac_vv_nxv8i16(<vscale x 8 x i16> %a, <vscale x 8 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, m2, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v12, v8, v10, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m2, ta, ma
 ; CHECK-NEXT:    vmv2r.v v8, v12
 ; CHECK-NEXT:    ret
   %x = call <vscale x 8 x i16> @llvm.vp.mul.nxv8i16(<vscale x 8 x i16> %a, <vscale x 8 x i16> %b, <vscale x 8 x i1> splat (i1 -1), i32 %evl)
@@ -933,6 +974,7 @@ define <vscale x 8 x i16> @vnmsac_vx_nxv8i16(<vscale x 8 x i16> %a, i16 %b, <vsc
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m2, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v10, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m2, ta, ma
 ; CHECK-NEXT:    vmv2r.v v8, v10
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 8 x i16> poison, i16 %b, i32 0
@@ -963,6 +1005,7 @@ define <vscale x 8 x i16> @vnmsac_vv_nxv8i16_ta(<vscale x 8 x i16> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, m2, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v12, v8, v10, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m2, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v12
 ; CHECK-NEXT:    ret
   %x = call <vscale x 8 x i16> @llvm.vp.mul.nxv8i16(<vscale x 8 x i16> %a, <vscale x 8 x i16> %b, <vscale x 8 x i1> splat (i1 -1), i32 %evl)
@@ -976,6 +1019,7 @@ define <vscale x 8 x i16> @vnmsac_vx_nxv8i16_ta(<vscale x 8 x i16> %a, i16 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m2, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v10, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m2, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v10
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 8 x i16> poison, i16 %b, i32 0
@@ -996,6 +1040,7 @@ define <vscale x 16 x i16> @vnmsac_vv_nxv16i16(<vscale x 16 x i16> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, m4, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v16, v8, v12, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m4, ta, ma
 ; CHECK-NEXT:    vmv4r.v v8, v16
 ; CHECK-NEXT:    ret
   %x = call <vscale x 16 x i16> @llvm.vp.mul.nxv16i16(<vscale x 16 x i16> %a, <vscale x 16 x i16> %b, <vscale x 16 x i1> splat (i1 -1), i32 %evl)
@@ -1022,6 +1067,7 @@ define <vscale x 16 x i16> @vnmsac_vx_nxv16i16(<vscale x 16 x i16> %a, i16 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m4, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v12, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m4, ta, ma
 ; CHECK-NEXT:    vmv4r.v v8, v12
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 16 x i16> poison, i16 %b, i32 0
@@ -1052,6 +1098,7 @@ define <vscale x 16 x i16> @vnmsac_vv_nxv16i16_ta(<vscale x 16 x i16> %a, <vscal
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e16, m4, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v16, v8, v12, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m4, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v16
 ; CHECK-NEXT:    ret
   %x = call <vscale x 16 x i16> @llvm.vp.mul.nxv16i16(<vscale x 16 x i16> %a, <vscale x 16 x i16> %b, <vscale x 16 x i1> splat (i1 -1), i32 %evl)
@@ -1065,6 +1112,7 @@ define <vscale x 16 x i16> @vnmsac_vx_nxv16i16_ta(<vscale x 16 x i16> %a, i16 %b
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m4, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v12, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m4, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v12
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 16 x i16> poison, i16 %b, i32 0
@@ -1086,6 +1134,7 @@ define <vscale x 32 x i16> @vnmsac_vv_nxv32i16(<vscale x 32 x i16> %a, <vscale x
 ; CHECK-NEXT:    vl8re16.v v24, (a0)
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m8, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v24, v8, v16, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m8, ta, ma
 ; CHECK-NEXT:    vmv8r.v v8, v24
 ; CHECK-NEXT:    ret
   %x = call <vscale x 32 x i16> @llvm.vp.mul.nxv32i16(<vscale x 32 x i16> %a, <vscale x 32 x i16> %b, <vscale x 32 x i1> splat (i1 -1), i32 %evl)
@@ -1113,6 +1162,7 @@ define <vscale x 32 x i16> @vnmsac_vx_nxv32i16(<vscale x 32 x i16> %a, i16 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m8, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v16, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m8, ta, ma
 ; CHECK-NEXT:    vmv8r.v v8, v16
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 32 x i16> poison, i16 %b, i32 0
@@ -1144,6 +1194,7 @@ define <vscale x 32 x i16> @vnmsac_vv_nxv32i16_ta(<vscale x 32 x i16> %a, <vscal
 ; CHECK-NEXT:    vl8re16.v v24, (a0)
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m8, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v24, v8, v16, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m8, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v24
 ; CHECK-NEXT:    ret
   %x = call <vscale x 32 x i16> @llvm.vp.mul.nxv32i16(<vscale x 32 x i16> %a, <vscale x 32 x i16> %b, <vscale x 32 x i1> splat (i1 -1), i32 %evl)
@@ -1157,6 +1208,7 @@ define <vscale x 32 x i16> @vnmsac_vx_nxv32i16_ta(<vscale x 32 x i16> %a, i16 %b
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e16, m8, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v16, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e16, m8, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v16
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 32 x i16> poison, i16 %b, i32 0
@@ -1177,6 +1229,7 @@ define <vscale x 1 x i32> @vnmsac_vv_nxv1i32(<vscale x 1 x i32> %a, <vscale x 1 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e32, mf2, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 1 x i32> @llvm.vp.mul.nxv1i32(<vscale x 1 x i32> %a, <vscale x 1 x i32> %b, <vscale x 1 x i1> splat (i1 -1), i32 %evl)
@@ -1203,6 +1256,7 @@ define <vscale x 1 x i32> @vnmsac_vx_nxv1i32(<vscale x 1 x i32> %a, i32 %b, <vsc
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, mf2, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x i32> poison, i32 %b, i32 0
@@ -1233,6 +1287,7 @@ define <vscale x 1 x i32> @vnmsac_vv_nxv1i32_ta(<vscale x 1 x i32> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e32, mf2, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 1 x i32> @llvm.vp.mul.nxv1i32(<vscale x 1 x i32> %a, <vscale x 1 x i32> %b, <vscale x 1 x i1> splat (i1 -1), i32 %evl)
@@ -1246,6 +1301,7 @@ define <vscale x 1 x i32> @vnmsac_vx_nxv1i32_ta(<vscale x 1 x i32> %a, i32 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, mf2, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, mf2, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x i32> poison, i32 %b, i32 0
@@ -1266,6 +1322,7 @@ define <vscale x 2 x i32> @vnmsac_vv_nxv2i32(<vscale x 2 x i32> %a, <vscale x 2 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e32, m1, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 2 x i32> @llvm.vp.mul.nxv2i32(<vscale x 2 x i32> %a, <vscale x 2 x i32> %b, <vscale x 2 x i1> splat (i1 -1), i32 %evl)
@@ -1292,6 +1349,7 @@ define <vscale x 2 x i32> @vnmsac_vx_nxv2i32(<vscale x 2 x i32> %a, i32 %b, <vsc
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m1, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 2 x i32> poison, i32 %b, i32 0
@@ -1322,6 +1380,7 @@ define <vscale x 2 x i32> @vnmsac_vv_nxv2i32_ta(<vscale x 2 x i32> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e32, m1, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m1, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 2 x i32> @llvm.vp.mul.nxv2i32(<vscale x 2 x i32> %a, <vscale x 2 x i32> %b, <vscale x 2 x i1> splat (i1 -1), i32 %evl)
@@ -1335,6 +1394,7 @@ define <vscale x 2 x i32> @vnmsac_vx_nxv2i32_ta(<vscale x 2 x i32> %a, i32 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m1, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m1, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v9
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 2 x i32> poison, i32 %b, i32 0
@@ -1355,6 +1415,7 @@ define <vscale x 4 x i32> @vnmsac_vv_nxv4i32(<vscale x 4 x i32> %a, <vscale x 4 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e32, m2, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v12, v8, v10, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m2, ta, ma
 ; CHECK-NEXT:    vmv2r.v v8, v12
 ; CHECK-NEXT:    ret
   %x = call <vscale x 4 x i32> @llvm.vp.mul.nxv4i32(<vscale x 4 x i32> %a, <vscale x 4 x i32> %b, <vscale x 4 x i1> splat (i1 -1), i32 %evl)
@@ -1381,6 +1442,7 @@ define <vscale x 4 x i32> @vnmsac_vx_nxv4i32(<vscale x 4 x i32> %a, i32 %b, <vsc
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m2, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v10, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m2, ta, ma
 ; CHECK-NEXT:    vmv2r.v v8, v10
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 4 x i32> poison, i32 %b, i32 0
@@ -1411,6 +1473,7 @@ define <vscale x 4 x i32> @vnmsac_vv_nxv4i32_ta(<vscale x 4 x i32> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e32, m2, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v12, v8, v10, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m2, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v12
 ; CHECK-NEXT:    ret
   %x = call <vscale x 4 x i32> @llvm.vp.mul.nxv4i32(<vscale x 4 x i32> %a, <vscale x 4 x i32> %b, <vscale x 4 x i1> splat (i1 -1), i32 %evl)
@@ -1424,6 +1487,7 @@ define <vscale x 4 x i32> @vnmsac_vx_nxv4i32_ta(<vscale x 4 x i32> %a, i32 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m2, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v10, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m2, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v10
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 4 x i32> poison, i32 %b, i32 0
@@ -1444,6 +1508,7 @@ define <vscale x 8 x i32> @vnmsac_vv_nxv8i32(<vscale x 8 x i32> %a, <vscale x 8 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e32, m4, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v16, v8, v12, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m4, ta, ma
 ; CHECK-NEXT:    vmv4r.v v8, v16
 ; CHECK-NEXT:    ret
   %x = call <vscale x 8 x i32> @llvm.vp.mul.nxv8i32(<vscale x 8 x i32> %a, <vscale x 8 x i32> %b, <vscale x 8 x i1> splat (i1 -1), i32 %evl)
@@ -1470,6 +1535,7 @@ define <vscale x 8 x i32> @vnmsac_vx_nxv8i32(<vscale x 8 x i32> %a, i32 %b, <vsc
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m4, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v12, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m4, ta, ma
 ; CHECK-NEXT:    vmv4r.v v8, v12
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 8 x i32> poison, i32 %b, i32 0
@@ -1500,6 +1566,7 @@ define <vscale x 8 x i32> @vnmsac_vv_nxv8i32_ta(<vscale x 8 x i32> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e32, m4, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v16, v8, v12, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m4, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v16
 ; CHECK-NEXT:    ret
   %x = call <vscale x 8 x i32> @llvm.vp.mul.nxv8i32(<vscale x 8 x i32> %a, <vscale x 8 x i32> %b, <vscale x 8 x i1> splat (i1 -1), i32 %evl)
@@ -1513,6 +1580,7 @@ define <vscale x 8 x i32> @vnmsac_vx_nxv8i32_ta(<vscale x 8 x i32> %a, i32 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m4, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v12, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m4, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v12
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 8 x i32> poison, i32 %b, i32 0
@@ -1534,6 +1602,7 @@ define <vscale x 16 x i32> @vnmsac_vv_nxv16i32(<vscale x 16 x i32> %a, <vscale x
 ; CHECK-NEXT:    vl8re32.v v24, (a0)
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m8, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v24, v8, v16, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m8, ta, ma
 ; CHECK-NEXT:    vmv8r.v v8, v24
 ; CHECK-NEXT:    ret
   %x = call <vscale x 16 x i32> @llvm.vp.mul.nxv16i32(<vscale x 16 x i32> %a, <vscale x 16 x i32> %b, <vscale x 16 x i1> splat (i1 -1), i32 %evl)
@@ -1561,6 +1630,7 @@ define <vscale x 16 x i32> @vnmsac_vx_nxv16i32(<vscale x 16 x i32> %a, i32 %b, <
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m8, tu, mu
 ; CHECK-NEXT:    vnmsac.vx v16, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m8, ta, ma
 ; CHECK-NEXT:    vmv8r.v v8, v16
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 16 x i32> poison, i32 %b, i32 0
@@ -1592,6 +1662,7 @@ define <vscale x 16 x i32> @vnmsac_vv_nxv16i32_ta(<vscale x 16 x i32> %a, <vscal
 ; CHECK-NEXT:    vl8re32.v v24, (a0)
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m8, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v24, v8, v16, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m8, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v24
 ; CHECK-NEXT:    ret
   %x = call <vscale x 16 x i32> @llvm.vp.mul.nxv16i32(<vscale x 16 x i32> %a, <vscale x 16 x i32> %b, <vscale x 16 x i1> splat (i1 -1), i32 %evl)
@@ -1605,6 +1676,7 @@ define <vscale x 16 x i32> @vnmsac_vx_nxv16i32_ta(<vscale x 16 x i32> %a, i32 %b
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a1, e32, m8, ta, mu
 ; CHECK-NEXT:    vnmsac.vx v16, a0, v8, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e32, m8, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v16
 ; CHECK-NEXT:    ret
   %elt.head = insertelement <vscale x 16 x i32> poison, i32 %b, i32 0
@@ -1625,6 +1697,7 @@ define <vscale x 1 x i64> @vnmsac_vv_nxv1i64(<vscale x 1 x i64> %a, <vscale x 1 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e64, m1, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e64, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 1 x i64> @llvm.vp.mul.nxv1i64(<vscale x 1 x i64> %a, <vscale x 1 x i64> %b, <vscale x 1 x i1> splat (i1 -1), i32 %evl)
@@ -1658,6 +1731,7 @@ define <vscale x 1 x i64> @vnmsac_vx_nxv1i64(<vscale x 1 x i64> %a, i64 %b, <vsc
 ; RV32-NEXT:    vlse64.v v10, (a0), zero
 ; RV32-NEXT:    vsetvli zero, a2, e64, m1, tu, mu
 ; RV32-NEXT:    vnmsac.vv v9, v8, v10, v0.t
+; RV32-NEXT:    vsetvli zero, zero, e64, m1, ta, ma
 ; RV32-NEXT:    vmv1r.v v8, v9
 ; RV32-NEXT:    addi sp, sp, 16
 ; RV32-NEXT:    .cfi_def_cfa_offset 0
@@ -1667,6 +1741,7 @@ define <vscale x 1 x i64> @vnmsac_vx_nxv1i64(<vscale x 1 x i64> %a, i64 %b, <vsc
 ; RV64:       # %bb.0:
 ; RV64-NEXT:    vsetvli zero, a1, e64, m1, tu, mu
 ; RV64-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; RV64-NEXT:    vsetvli zero, zero, e64, m1, ta, ma
 ; RV64-NEXT:    vmv1r.v v8, v9
 ; RV64-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x i64> poison, i64 %b, i32 0
@@ -1713,6 +1788,7 @@ define <vscale x 1 x i64> @vnmsac_vv_nxv1i64_ta(<vscale x 1 x i64> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e64, m1, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e64, m1, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v10
 ; CHECK-NEXT:    ret
   %x = call <vscale x 1 x i64> @llvm.vp.mul.nxv1i64(<vscale x 1 x i64> %a, <vscale x 1 x i64> %b, <vscale x 1 x i1> splat (i1 -1), i32 %evl)
@@ -1733,6 +1809,7 @@ define <vscale x 1 x i64> @vnmsac_vx_nxv1i64_ta(<vscale x 1 x i64> %a, i64 %b, <
 ; RV32-NEXT:    vlse64.v v10, (a0), zero
 ; RV32-NEXT:    vsetvli zero, a2, e64, m1, ta, mu
 ; RV32-NEXT:    vnmsac.vv v9, v8, v10, v0.t
+; RV32-NEXT:    vsetvli zero, zero, e64, m1, ta, ma
 ; RV32-NEXT:    vmv.v.v v8, v9
 ; RV32-NEXT:    addi sp, sp, 16
 ; RV32-NEXT:    .cfi_def_cfa_offset 0
@@ -1742,6 +1819,7 @@ define <vscale x 1 x i64> @vnmsac_vx_nxv1i64_ta(<vscale x 1 x i64> %a, i64 %b, <
 ; RV64:       # %bb.0:
 ; RV64-NEXT:    vsetvli zero, a1, e64, m1, ta, mu
 ; RV64-NEXT:    vnmsac.vx v9, a0, v8, v0.t
+; RV64-NEXT:    vsetvli zero, zero, e64, m1, ta, ma
 ; RV64-NEXT:    vmv.v.v v8, v9
 ; RV64-NEXT:    ret
   %elt.head = insertelement <vscale x 1 x i64> poison, i64 %b, i32 0
@@ -1762,6 +1840,7 @@ define <vscale x 2 x i64> @vnmsac_vv_nxv2i64(<vscale x 2 x i64> %a, <vscale x 2 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e64, m2, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v12, v8, v10, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e64, m2, ta, ma
 ; CHECK-NEXT:    vmv2r.v v8, v12
 ; CHECK-NEXT:    ret
   %x = call <vscale x 2 x i64> @llvm.vp.mul.nxv2i64(<vscale x 2 x i64> %a, <vscale x 2 x i64> %b, <vscale x 2 x i1> splat (i1 -1), i32 %evl)
@@ -1795,6 +1874,7 @@ define <vscale x 2 x i64> @vnmsac_vx_nxv2i64(<vscale x 2 x i64> %a, i64 %b, <vsc
 ; RV32-NEXT:    vlse64.v v12, (a0), zero
 ; RV32-NEXT:    vsetvli zero, a2, e64, m2, tu, mu
 ; RV32-NEXT:    vnmsac.vv v10, v8, v12, v0.t
+; RV32-NEXT:    vsetvli zero, zero, e64, m2, ta, ma
 ; RV32-NEXT:    vmv2r.v v8, v10
 ; RV32-NEXT:    addi sp, sp, 16
 ; RV32-NEXT:    .cfi_def_cfa_offset 0
@@ -1804,6 +1884,7 @@ define <vscale x 2 x i64> @vnmsac_vx_nxv2i64(<vscale x 2 x i64> %a, i64 %b, <vsc
 ; RV64:       # %bb.0:
 ; RV64-NEXT:    vsetvli zero, a1, e64, m2, tu, mu
 ; RV64-NEXT:    vnmsac.vx v10, a0, v8, v0.t
+; RV64-NEXT:    vsetvli zero, zero, e64, m2, ta, ma
 ; RV64-NEXT:    vmv2r.v v8, v10
 ; RV64-NEXT:    ret
   %elt.head = insertelement <vscale x 2 x i64> poison, i64 %b, i32 0
@@ -1850,6 +1931,7 @@ define <vscale x 2 x i64> @vnmsac_vv_nxv2i64_ta(<vscale x 2 x i64> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e64, m2, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v12, v8, v10, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e64, m2, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v12
 ; CHECK-NEXT:    ret
   %x = call <vscale x 2 x i64> @llvm.vp.mul.nxv2i64(<vscale x 2 x i64> %a, <vscale x 2 x i64> %b, <vscale x 2 x i1> splat (i1 -1), i32 %evl)
@@ -1870,6 +1952,7 @@ define <vscale x 2 x i64> @vnmsac_vx_nxv2i64_ta(<vscale x 2 x i64> %a, i64 %b, <
 ; RV32-NEXT:    vlse64.v v12, (a0), zero
 ; RV32-NEXT:    vsetvli zero, a2, e64, m2, ta, mu
 ; RV32-NEXT:    vnmsac.vv v10, v8, v12, v0.t
+; RV32-NEXT:    vsetvli zero, zero, e64, m2, ta, ma
 ; RV32-NEXT:    vmv.v.v v8, v10
 ; RV32-NEXT:    addi sp, sp, 16
 ; RV32-NEXT:    .cfi_def_cfa_offset 0
@@ -1879,6 +1962,7 @@ define <vscale x 2 x i64> @vnmsac_vx_nxv2i64_ta(<vscale x 2 x i64> %a, i64 %b, <
 ; RV64:       # %bb.0:
 ; RV64-NEXT:    vsetvli zero, a1, e64, m2, ta, mu
 ; RV64-NEXT:    vnmsac.vx v10, a0, v8, v0.t
+; RV64-NEXT:    vsetvli zero, zero, e64, m2, ta, ma
 ; RV64-NEXT:    vmv.v.v v8, v10
 ; RV64-NEXT:    ret
   %elt.head = insertelement <vscale x 2 x i64> poison, i64 %b, i32 0
@@ -1899,6 +1983,7 @@ define <vscale x 4 x i64> @vnmsac_vv_nxv4i64(<vscale x 4 x i64> %a, <vscale x 4 
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e64, m4, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v16, v8, v12, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e64, m4, ta, ma
 ; CHECK-NEXT:    vmv4r.v v8, v16
 ; CHECK-NEXT:    ret
   %x = call <vscale x 4 x i64> @llvm.vp.mul.nxv4i64(<vscale x 4 x i64> %a, <vscale x 4 x i64> %b, <vscale x 4 x i1> splat (i1 -1), i32 %evl)
@@ -1932,6 +2017,7 @@ define <vscale x 4 x i64> @vnmsac_vx_nxv4i64(<vscale x 4 x i64> %a, i64 %b, <vsc
 ; RV32-NEXT:    vlse64.v v16, (a0), zero
 ; RV32-NEXT:    vsetvli zero, a2, e64, m4, tu, mu
 ; RV32-NEXT:    vnmsac.vv v12, v8, v16, v0.t
+; RV32-NEXT:    vsetvli zero, zero, e64, m4, ta, ma
 ; RV32-NEXT:    vmv4r.v v8, v12
 ; RV32-NEXT:    addi sp, sp, 16
 ; RV32-NEXT:    .cfi_def_cfa_offset 0
@@ -1941,6 +2027,7 @@ define <vscale x 4 x i64> @vnmsac_vx_nxv4i64(<vscale x 4 x i64> %a, i64 %b, <vsc
 ; RV64:       # %bb.0:
 ; RV64-NEXT:    vsetvli zero, a1, e64, m4, tu, mu
 ; RV64-NEXT:    vnmsac.vx v12, a0, v8, v0.t
+; RV64-NEXT:    vsetvli zero, zero, e64, m4, ta, ma
 ; RV64-NEXT:    vmv4r.v v8, v12
 ; RV64-NEXT:    ret
   %elt.head = insertelement <vscale x 4 x i64> poison, i64 %b, i32 0
@@ -1987,6 +2074,7 @@ define <vscale x 4 x i64> @vnmsac_vv_nxv4i64_ta(<vscale x 4 x i64> %a, <vscale x
 ; CHECK:       # %bb.0:
 ; CHECK-NEXT:    vsetvli zero, a0, e64, m4, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v16, v8, v12, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e64, m4, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v16
 ; CHECK-NEXT:    ret
   %x = call <vscale x 4 x i64> @llvm.vp.mul.nxv4i64(<vscale x 4 x i64> %a, <vscale x 4 x i64> %b, <vscale x 4 x i1> splat (i1 -1), i32 %evl)
@@ -2007,6 +2095,7 @@ define <vscale x 4 x i64> @vnmsac_vx_nxv4i64_ta(<vscale x 4 x i64> %a, i64 %b, <
 ; RV32-NEXT:    vlse64.v v16, (a0), zero
 ; RV32-NEXT:    vsetvli zero, a2, e64, m4, ta, mu
 ; RV32-NEXT:    vnmsac.vv v12, v8, v16, v0.t
+; RV32-NEXT:    vsetvli zero, zero, e64, m4, ta, ma
 ; RV32-NEXT:    vmv.v.v v8, v12
 ; RV32-NEXT:    addi sp, sp, 16
 ; RV32-NEXT:    .cfi_def_cfa_offset 0
@@ -2016,6 +2105,7 @@ define <vscale x 4 x i64> @vnmsac_vx_nxv4i64_ta(<vscale x 4 x i64> %a, i64 %b, <
 ; RV64:       # %bb.0:
 ; RV64-NEXT:    vsetvli zero, a1, e64, m4, ta, mu
 ; RV64-NEXT:    vnmsac.vx v12, a0, v8, v0.t
+; RV64-NEXT:    vsetvli zero, zero, e64, m4, ta, ma
 ; RV64-NEXT:    vmv.v.v v8, v12
 ; RV64-NEXT:    ret
   %elt.head = insertelement <vscale x 4 x i64> poison, i64 %b, i32 0
@@ -2037,6 +2127,7 @@ define <vscale x 8 x i64> @vnmsac_vv_nxv8i64(<vscale x 8 x i64> %a, <vscale x 8 
 ; CHECK-NEXT:    vl8re64.v v24, (a0)
 ; CHECK-NEXT:    vsetvli zero, a1, e64, m8, tu, mu
 ; CHECK-NEXT:    vnmsac.vv v24, v8, v16, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e64, m8, ta, ma
 ; CHECK-NEXT:    vmv8r.v v8, v24
 ; CHECK-NEXT:    ret
   %x = call <vscale x 8 x i64> @llvm.vp.mul.nxv8i64(<vscale x 8 x i64> %a, <vscale x 8 x i64> %b, <vscale x 8 x i1> splat (i1 -1), i32 %evl)
@@ -2071,6 +2162,7 @@ define <vscale x 8 x i64> @vnmsac_vx_nxv8i64(<vscale x 8 x i64> %a, i64 %b, <vsc
 ; RV32-NEXT:    vlse64.v v24, (a0), zero
 ; RV32-NEXT:    vsetvli zero, a2, e64, m8, tu, mu
 ; RV32-NEXT:    vnmsac.vv v16, v8, v24, v0.t
+; RV32-NEXT:    vsetvli zero, zero, e64, m8, ta, ma
 ; RV32-NEXT:    vmv8r.v v8, v16
 ; RV32-NEXT:    addi sp, sp, 16
 ; RV32-NEXT:    .cfi_def_cfa_offset 0
@@ -2080,6 +2172,7 @@ define <vscale x 8 x i64> @vnmsac_vx_nxv8i64(<vscale x 8 x i64> %a, i64 %b, <vsc
 ; RV64:       # %bb.0:
 ; RV64-NEXT:    vsetvli zero, a1, e64, m8, tu, mu
 ; RV64-NEXT:    vnmsac.vx v16, a0, v8, v0.t
+; RV64-NEXT:    vsetvli zero, zero, e64, m8, ta, ma
 ; RV64-NEXT:    vmv8r.v v8, v16
 ; RV64-NEXT:    ret
   %elt.head = insertelement <vscale x 8 x i64> poison, i64 %b, i32 0
@@ -2127,6 +2220,7 @@ define <vscale x 8 x i64> @vnmsac_vv_nxv8i64_ta(<vscale x 8 x i64> %a, <vscale x
 ; CHECK-NEXT:    vl8re64.v v24, (a0)
 ; CHECK-NEXT:    vsetvli zero, a1, e64, m8, ta, mu
 ; CHECK-NEXT:    vnmsac.vv v24, v8, v16, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e64, m8, ta, ma
 ; CHECK-NEXT:    vmv.v.v v8, v24
 ; CHECK-NEXT:    ret
   %x = call <vscale x 8 x i64> @llvm.vp.mul.nxv8i64(<vscale x 8 x i64> %a, <vscale x 8 x i64> %b, <vscale x 8 x i1> splat (i1 -1), i32 %evl)
@@ -2147,6 +2241,7 @@ define <vscale x 8 x i64> @vnmsac_vx_nxv8i64_ta(<vscale x 8 x i64> %a, i64 %b, <
 ; RV32-NEXT:    vlse64.v v24, (a0), zero
 ; RV32-NEXT:    vsetvli zero, a2, e64, m8, ta, mu
 ; RV32-NEXT:    vnmsac.vv v16, v8, v24, v0.t
+; RV32-NEXT:    vsetvli zero, zero, e64, m8, ta, ma
 ; RV32-NEXT:    vmv.v.v v8, v16
 ; RV32-NEXT:    addi sp, sp, 16
 ; RV32-NEXT:    .cfi_def_cfa_offset 0
@@ -2156,6 +2251,7 @@ define <vscale x 8 x i64> @vnmsac_vx_nxv8i64_ta(<vscale x 8 x i64> %a, i64 %b, <
 ; RV64:       # %bb.0:
 ; RV64-NEXT:    vsetvli zero, a1, e64, m8, ta, mu
 ; RV64-NEXT:    vnmsac.vx v16, a0, v8, v0.t
+; RV64-NEXT:    vsetvli zero, zero, e64, m8, ta, ma
 ; RV64-NEXT:    vmv.v.v v8, v16
 ; RV64-NEXT:    ret
   %elt.head = insertelement <vscale x 8 x i64> poison, i64 %b, i32 0

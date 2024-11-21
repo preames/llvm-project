@@ -197,9 +197,9 @@ define <3 x i64> @llrint_v3i64_v3f32(<3 x float> %x) {
 ; RV64-NEXT:    vsetivli zero, 4, e64, m2, ta, ma
 ; RV64-NEXT:    vmv.v.x v10, a0
 ; RV64-NEXT:    fcvt.l.s a0, fa5
-; RV64-NEXT:    vsetvli zero, zero, e32, m1, ta, ma
+; RV64-NEXT:    vsetivli zero, 4, e32, m2, ta, ma
 ; RV64-NEXT:    vfmv.f.s fa5, v8
-; RV64-NEXT:    vsetvli zero, zero, e64, m2, ta, ma
+; RV64-NEXT:    vsetivli zero, 4, e64, m2, ta, ma
 ; RV64-NEXT:    vslide1down.vx v8, v10, a1
 ; RV64-NEXT:    vslide1down.vx v8, v8, a0
 ; RV64-NEXT:    fcvt.l.s a0, fa5
@@ -306,9 +306,9 @@ define <4 x i64> @llrint_v4i64_v4f32(<4 x float> %x) {
 ; RV64-NEXT:    vsetivli zero, 4, e64, m2, ta, ma
 ; RV64-NEXT:    vmv.v.x v10, a0
 ; RV64-NEXT:    fcvt.l.s a0, fa5
-; RV64-NEXT:    vsetvli zero, zero, e32, m1, ta, ma
+; RV64-NEXT:    vsetivli zero, 4, e32, m2, ta, ma
 ; RV64-NEXT:    vfmv.f.s fa5, v8
-; RV64-NEXT:    vsetvli zero, zero, e64, m2, ta, ma
+; RV64-NEXT:    vsetivli zero, 4, e64, m2, ta, ma
 ; RV64-NEXT:    vslide1down.vx v8, v10, a1
 ; RV64-NEXT:    vslide1down.vx v8, v8, a0
 ; RV64-NEXT:    fcvt.l.s a0, fa5

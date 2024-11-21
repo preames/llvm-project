@@ -51,6 +51,7 @@ define <4 x i32> @interleave_v2i32(<2 x i32> %x, <2 x i32> %y) {
 define <4 x i64> @interleave_v2i64(<2 x i64> %x, <2 x i64> %y) {
 ; V128-LABEL: interleave_v2i64:
 ; V128:       # %bb.0:
+; V128-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; V128-NEXT:    vmv1r.v v12, v9
 ; V128-NEXT:    vsetivli zero, 4, e16, mf2, ta, ma
 ; V128-NEXT:    vid.v v9
@@ -59,6 +60,7 @@ define <4 x i64> @interleave_v2i64(<2 x i64> %x, <2 x i64> %y) {
 ; V128-NEXT:    vsetvli zero, zero, e64, m2, ta, mu
 ; V128-NEXT:    vrgatherei16.vv v10, v8, v14
 ; V128-NEXT:    vrgatherei16.vv v10, v12, v14, v0.t
+; V128-NEXT:    vsetvli zero, zero, e64, m2, ta, ma
 ; V128-NEXT:    vmv.v.v v8, v10
 ; V128-NEXT:    ret
 ;
@@ -71,6 +73,7 @@ define <4 x i64> @interleave_v2i64(<2 x i64> %x, <2 x i64> %y) {
 ; RV32-V512-NEXT:    vsetvli zero, zero, e64, m1, ta, mu
 ; RV32-V512-NEXT:    vrgatherei16.vv v10, v8, v11
 ; RV32-V512-NEXT:    vrgatherei16.vv v10, v9, v11, v0.t
+; RV32-V512-NEXT:    vsetvli zero, zero, e64, m1, ta, ma
 ; RV32-V512-NEXT:    vmv.v.v v8, v10
 ; RV32-V512-NEXT:    ret
 ;
@@ -82,6 +85,7 @@ define <4 x i64> @interleave_v2i64(<2 x i64> %x, <2 x i64> %y) {
 ; RV64-V512-NEXT:    vmv.v.i v0, 10
 ; RV64-V512-NEXT:    vrgather.vv v10, v8, v11
 ; RV64-V512-NEXT:    vrgather.vv v10, v9, v11, v0.t
+; RV64-V512-NEXT:    vsetvli zero, zero, e64, m1, ta, ma
 ; RV64-V512-NEXT:    vmv.v.v v8, v10
 ; RV64-V512-NEXT:    ret
   %a = shufflevector <2 x i64> %x, <2 x i64> %y, <4 x i32> <i32 0, i32 2, i32 1, i32 3>
@@ -198,6 +202,7 @@ define <4 x i32> @interleave_v4i32_offset_1(<4 x i32> %x, <4 x i32> %y) {
 ; V128-NEXT:    vmv.v.i v0, 10
 ; V128-NEXT:    vadd.vi v8, v8, 1
 ; V128-NEXT:    vrgather.vv v10, v9, v8, v0.t
+; V128-NEXT:    vsetvli zero, zero, e32, m1, ta, ma
 ; V128-NEXT:    vmv.v.v v8, v10
 ; V128-NEXT:    ret
 ;
@@ -215,6 +220,7 @@ define <4 x i32> @interleave_v4i32_offset_1(<4 x i32> %x, <4 x i32> %y) {
 ; V512-NEXT:    vmv.v.i v0, 10
 ; V512-NEXT:    vadd.vi v8, v8, 1
 ; V512-NEXT:    vrgather.vv v10, v9, v8, v0.t
+; V512-NEXT:    vsetvli zero, zero, e32, mf2, ta, ma
 ; V512-NEXT:    vmv1r.v v8, v10
 ; V512-NEXT:    ret
   %a = shufflevector <4 x i32> %x, <4 x i32> %y, <4 x i32> <i32 0, i32 5, i32 1, i32 6>
@@ -411,6 +417,7 @@ define <64 x i32> @interleave_v32i32(<32 x i32> %x, <32 x i32> %y) {
 ; V128-NEXT:    slli a0, a0, 3
 ; V128-NEXT:    sub sp, sp, a0
 ; V128-NEXT:    .cfi_escape 0x0f, 0x0d, 0x72, 0x00, 0x11, 0x10, 0x22, 0x11, 0x08, 0x92, 0xa2, 0x38, 0x00, 0x1e, 0x22 # sp + 16 + 8 * vlenb
+; V128-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; V128-NEXT:    vmv8r.v v24, v16
 ; V128-NEXT:    vmv8r.v v16, v8
 ; V128-NEXT:    vmv8r.v v8, v24

@@ -96,6 +96,10 @@
     ret void
   }
 
+  define <4 x i64> @vmv1r_before_vsetvli() {
+    ret <4 x i64> zeroinitializer
+  }
+
   declare <vscale x 1 x i64> @llvm.riscv.vadd.nxv1i64.nxv1i64.i64(<vscale x 1 x i64>, <vscale x 1 x i64>, <vscale x 1 x i64>, i64) #1
 
   declare <vscale x 1 x i64> @llvm.riscv.vle.nxv1i64.i64(<vscale x 1 x i64>, ptr nocapture, i64) #4
@@ -601,3 +605,76 @@ body: |
     %x:gpr = COPY $x10
     renamable $v8 = PseudoVMV_S_X undef renamable $v8, killed renamable %x, 1, 5
     PseudoRET implicit $v8
+...
+---
+name:            vmv1r_before_vsetvli
+alignment:       2
+exposesReturnsTwice: false
+legalized:       false
+regBankSelected: false
+selected:        false
+failedISel:      false
+tracksRegLiveness: true
+hasWinCFI:       false
+callsEHReturn:   false
+callsUnwindInit: false
+hasEHCatchret:   false
+hasEHScopes:     false
+hasEHFunclets:   false
+isOutlined:      false
+debugInstrRef:   false
+failsVerification: false
+tracksDebugUserValues: true
+registers:
+  - { id: 0, class: gpr, preferred-register: '$x10' }
+  - { id: 1, class: vr, preferred-register: '$v8' }
+  - { id: 2, class: vr, preferred-register: '$v1' }
+liveins:
+  - { reg: '$x10', virtual-reg: '%0' }
+  - { reg: '$v1', virtual-reg: '%2' }
+frameInfo:
+  isFrameAddressTaken: false
+  isReturnAddressTaken: false
+  hasStackMap:     false
+  hasPatchPoint:   false
+  stackSize:       0
+  offsetAdjustment: 0
+  maxAlignment:    1
+  adjustsStack:    false
+  hasCalls:        false
+  stackProtector:  ''
+  functionContext: ''
+  maxCallFrameSize: 4294967295
+  cvBytesOfCalleeSavedRegisters: 0
+  hasOpaqueSPAdjustment: false
+  hasVAStart:      false
+  hasMustTailInVarArgFunc: false
+  hasTailCall:     false
+  isCalleeSavedInfoValid: false
+  localFrameSize:  0
+  savePoint:       ''
+  restorePoint:    ''
+fixedStack:      []
+stack:           []
+entry_values:    []
+callSites:       []
+debugValueSubstitutions: []
+constants:       []
+machineFunctionInfo:
+  varArgsFrameIndex: 0
+  varArgsSaveSize: 0
+body:             |
+  bb.0 (%ir-block.0):
+    liveins: $v1, $x10
+
+    ; CHECK-LABEL: name: vmv1r_before_vsetvli
+    ; CHECK: liveins: $v1, $x10
+    ; CHECK-NEXT: {{  $}}
+    ; CHECK-NEXT: dead [[COPY:%[0-9]+]]:gpr = COPY $x10
+    ; CHECK-NEXT: dead $x0 = PseudoVSETIVLI 1, 192 /* e8, m1, ta, ma */, implicit-def $vl, implicit-def $vtype
+    ; CHECK-NEXT: renamable $v8 = COPY renamable $v1, implicit $vtype
+    ; CHECK-NEXT: PseudoRET implicit $v8
+    %0:gpr = COPY $x10
+    renamable $v8 = COPY renamable $v1
+    PseudoRET implicit $v8
+...

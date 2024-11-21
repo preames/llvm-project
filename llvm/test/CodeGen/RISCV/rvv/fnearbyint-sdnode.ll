@@ -153,8 +153,8 @@ define <vscale x 32 x bfloat> @nearbyint_nxv32bf16(<vscale x 32 x bfloat> %x) {
 ; CHECK-NEXT:    vsetvli zero, zero, e32, m8, ta, mu
 ; CHECK-NEXT:    vfsgnj.vv v16, v8, v16, v0.t
 ; CHECK-NEXT:    frflags a0
-; CHECK-NEXT:    vmv1r.v v0, v7
 ; CHECK-NEXT:    vsetvli zero, zero, e32, m8, ta, ma
+; CHECK-NEXT:    vmv1r.v v0, v7
 ; CHECK-NEXT:    vfcvt.x.f.v v8, v24, v0.t
 ; CHECK-NEXT:    addi a1, sp, 16
 ; CHECK-NEXT:    vs8r.v v8, (a1) # Unknown-size Folded Spill
@@ -415,8 +415,8 @@ define <vscale x 32 x half> @nearbyint_nxv32f16(<vscale x 32 x half> %x) {
 ; ZVFHMIN-NEXT:    vsetvli zero, zero, e32, m8, ta, mu
 ; ZVFHMIN-NEXT:    vfsgnj.vv v16, v8, v16, v0.t
 ; ZVFHMIN-NEXT:    frflags a0
-; ZVFHMIN-NEXT:    vmv1r.v v0, v7
 ; ZVFHMIN-NEXT:    vsetvli zero, zero, e32, m8, ta, ma
+; ZVFHMIN-NEXT:    vmv1r.v v0, v7
 ; ZVFHMIN-NEXT:    vfcvt.x.f.v v8, v24, v0.t
 ; ZVFHMIN-NEXT:    addi a1, sp, 16
 ; ZVFHMIN-NEXT:    vs8r.v v8, (a1) # Unknown-size Folded Spill

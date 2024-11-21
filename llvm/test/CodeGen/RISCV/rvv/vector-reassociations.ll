@@ -120,6 +120,7 @@ entry:
 define <vscale x 1 x i8> @vadd_vv_passthru(<vscale x 1 x i8> %0, <vscale x 1 x i8> %1, i32 %2) nounwind {
 ; CHECK-LABEL: vadd_vv_passthru:
 ; CHECK:       # %bb.0: # %entry
+; CHECK-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v10, v8
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf8, tu, ma
 ; CHECK-NEXT:    vadd.vv v10, v8, v9
@@ -152,6 +153,7 @@ entry:
 define <vscale x 1 x i8> @vadd_vv_passthru_negative(<vscale x 1 x i8> %0, <vscale x 1 x i8> %1, i32 %2) nounwind {
 ; CHECK-LABEL: vadd_vv_passthru_negative:
 ; CHECK:       # %bb.0: # %entry
+; CHECK-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v10, v8
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf8, tu, ma
 ; CHECK-NEXT:    vadd.vv v10, v8, v9
@@ -183,10 +185,13 @@ entry:
 define <vscale x 1 x i8> @vadd_vv_mask(<vscale x 1 x i8> %0, <vscale x 1 x i8> %1, i32 %2, <vscale x 1 x i1> %m) nounwind {
 ; CHECK-LABEL: vadd_vv_mask:
 ; CHECK:       # %bb.0: # %entry
+; CHECK-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v10, v8
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf8, ta, mu
 ; CHECK-NEXT:    vadd.vv v10, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, ma
 ; CHECK-NEXT:    vmv1r.v v9, v8
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, mu
 ; CHECK-NEXT:    vadd.vv v9, v8, v8, v0.t
 ; CHECK-NEXT:    vadd.vv v8, v9, v10, v0.t
 ; CHECK-NEXT:    ret
@@ -218,12 +223,17 @@ entry:
 define <vscale x 1 x i8> @vadd_vv_mask_negative(<vscale x 1 x i8> %0, <vscale x 1 x i8> %1, i32 %2, <vscale x 1 x i1> %m, <vscale x 1 x i1> %m2) nounwind {
 ; CHECK-LABEL: vadd_vv_mask_negative:
 ; CHECK:       # %bb.0: # %entry
+; CHECK-NEXT:    vsetivli zero, 1, e8, m1, ta, ma
 ; CHECK-NEXT:    vmv1r.v v11, v8
 ; CHECK-NEXT:    vsetvli zero, a0, e8, mf8, ta, mu
 ; CHECK-NEXT:    vadd.vv v11, v8, v9, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, ma
 ; CHECK-NEXT:    vmv1r.v v9, v8
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, mu
 ; CHECK-NEXT:    vadd.vv v9, v8, v11, v0.t
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, ma
 ; CHECK-NEXT:    vmv1r.v v0, v10
+; CHECK-NEXT:    vsetvli zero, zero, e8, mf8, ta, mu
 ; CHECK-NEXT:    vadd.vv v8, v8, v9, v0.t
 ; CHECK-NEXT:    ret
 entry:
