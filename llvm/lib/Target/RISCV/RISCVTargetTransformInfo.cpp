@@ -402,26 +402,27 @@ costShuffleViaVRegSplitting(RISCVTTIImpl &TTI, MVT LegalVT,
   LegalVT = TTI.getTypeLegalizationCost(
                    FixedVectorType::get(Tp->getElementType(), ElemsPerVReg))
                 .second;
-  // Number of destination vectors after legalization:
-  InstructionCost NumOfDests =
-      divideCeil(Mask.size(), LegalVT.getVectorNumElements());
-  if (NumOfDests <= 1 ||
-      LegalVT.getVectorElementType().getSizeInBits() !=
+  if (LegalVT.getVectorElementType().getSizeInBits() !=
           Tp->getElementType()->getPrimitiveSizeInBits() ||
       LegalVT.getVectorNumElements() >= Tp->getElementCount().getFixedValue())
     return InstructionCost::getInvalid();
 
+  // Number of destination and source vectors after legalization:
+  unsigned NumOfDests =
+      divideCeil(Mask.size(), LegalVT.getVectorNumElements());
   unsigned VecTySize = TTI.getDataLayout().getTypeStoreSize(Tp);
   unsigned LegalVTSize = LegalVT.getStoreSize();
   // Number of source vectors after legalization:
   unsigned NumOfSrcs = divideCeil(VecTySize, LegalVTSize);
+  if (NumOfDests <= 1 && NumOfSrcs <= 1)
+    // Nothing to split
+    return InstructionCost::getInvalid();
 
   auto *SingleOpTy = FixedVectorType::get(Tp->getElementType(),
                                           LegalVT.getVectorNumElements());
 
-  unsigned E = *NumOfDests.getValue();
   unsigned NormalizedVF =
-      LegalVT.getVectorNumElements() * std::max(NumOfSrcs, E);
+      LegalVT.getVectorNumElements() * std::max(NumOfSrcs, NumOfDests);
   unsigned NumOfSrcRegs = NormalizedVF / LegalVT.getVectorNumElements();
   unsigned NumOfDestRegs = NormalizedVF / LegalVT.getVectorNumElements();
   SmallVector<int> NormalizedMask(NormalizedVF, PoisonMaskElem);
