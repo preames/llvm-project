@@ -390,14 +390,7 @@ bool PreISelIntrinsicLowering::expandMemIntrinsicUses(Function &F) const {
       IRBuilder<> Builder(Inst);
       Module *M = Memset->getModule();
       const DataLayout &DL = Memset->getDataLayout();
-
-      Type *DestPtrTy = Memset->getRawDest()->getType();
       Type *SizeTTy = TLI.getSizeTType(*M);
-      StringRef FuncName = "memset_pattern16";
-      FunctionCallee MSP = getOrInsertLibFunc(M, TLI, LibFunc_memset_pattern16,
-                                              Builder.getVoidTy(), DestPtrTy,
-                                              Builder.getPtrTy(), SizeTTy);
-      inferNonMandatoryLibFuncAttrs(M, FuncName, TLI);
 
       // Otherwise we should form a memset_pattern16.  PatternValue is known
       // to be an constant array of 16-bytes. Put the value into a mergable
@@ -411,13 +404,14 @@ bool PreISelIntrinsicLowering::expandMemIntrinsicUses(Function &F) const {
           GlobalValue::UnnamedAddr::Global); // Ok to merge these.
       // TODO: Consider relaxing alignment requirement.
       GV->setAlignment(Align(16));
-      Value *PatternPtr = GV;
       Value *NumBytes = Builder.CreateMul(
           TLI.getAsSizeT(DL.getTypeAllocSize(Memset->getValue()->getType()),
                          *M),
           Builder.CreateZExtOrTrunc(Memset->getLength(), SizeTTy));
-      CallInst *MemsetPattern16Call =
-          Builder.CreateCall(MSP, {Memset->getRawDest(), PatternPtr, NumBytes});
+
+      CallInst *MemsetPattern16Call = cast<CallInst>(emitMemSetPattern16(
+          Memset->getRawDest(), GV, NumBytes, Builder, DL, &TLI));
+
       MemsetPattern16Call->setAAMetadata(Memset->getAAMetadata());
       // Preserve any call site attributes on the destination pointer
       // argument (e.g. alignment).

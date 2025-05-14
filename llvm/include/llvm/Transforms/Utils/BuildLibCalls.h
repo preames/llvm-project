@@ -157,6 +157,10 @@ namespace llvm {
   Value *emitMemCmp(Value *Ptr1, Value *Ptr2, Value *Len, IRBuilderBase &B,
                     const DataLayout &DL, const TargetLibraryInfo *TLI);
 
+  Value *emitMemSetPattern16(Value *Dest, Value *ValPtr, Value *Len,
+                             IRBuilderBase &B, const DataLayout &DL,
+                             const TargetLibraryInfo *TLI);
+
   /// Emit a call to the bcmp function.
   Value *emitBCmp(Value *Ptr1, Value *Ptr2, Value *Len, IRBuilderBase &B,
                   const DataLayout &DL, const TargetLibraryInfo *TLI);

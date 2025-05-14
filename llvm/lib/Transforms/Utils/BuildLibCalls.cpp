@@ -1605,7 +1605,8 @@ static Value *emitLibCall(LibFunc TheLibFunc, Type *ReturnType,
   FunctionType *FuncType = FunctionType::get(ReturnType, ParamTypes, IsVaArgs);
   FunctionCallee Callee = getOrInsertLibFunc(M, *TLI, TheLibFunc, FuncType);
   inferNonMandatoryLibFuncAttrs(M, FuncName, *TLI);
-  CallInst *CI = B.CreateCall(Callee, Operands, FuncName);
+  CallInst *CI =
+      B.CreateCall(Callee, Operands, ReturnType->isVoidTy() ? "" : FuncName);
   if (const Function *F =
           dyn_cast<Function>(Callee.getCallee()->stripPointerCasts()))
     CI->setCallingConv(F->getCallingConv());
@@ -1752,6 +1753,16 @@ Value *llvm::emitBCmp(Value *Ptr1, Value *Ptr2, Value *Len, IRBuilderBase &B,
   return emitLibCall(LibFunc_bcmp, IntTy,
                      {VoidPtrTy, VoidPtrTy, SizeTTy},
                      {Ptr1, Ptr2, Len}, B, TLI);
+}
+
+Value *llvm::emitMemSetPattern16(Value *Dest, Value *ValPtr, Value *Len,
+                                 IRBuilderBase &B, const DataLayout &DL,
+                                 const TargetLibraryInfo *TLI) {
+  Type *DestPtrTy = Dest->getType();
+  Type *SizeTTy = getSizeTTy(B, TLI);
+  return emitLibCall(LibFunc_memset_pattern16, B.getVoidTy(),
+                     {DestPtrTy, B.getPtrTy(), SizeTTy}, {Dest, ValPtr, Len}, B,
+                     TLI);
 }
 
 Value *llvm::emitMemCCpy(Value *Ptr1, Value *Ptr2, Value *Val, Value *Len,

@@ -1102,12 +1102,7 @@ bool LoopIdiomRecognize::processLoopStridedStore(
         /*isVolatile=*/false, AATags.TBAA, AATags.Scope, AATags.NoAlias);
   } else if (isLibFuncEmittable(M, TLI, LibFunc_memset_pattern16)) {
     // Everything is emitted in default address space
-    Type *Int8PtrTy = DestInt8PtrTy;
-
-    StringRef FuncName = "memset_pattern16";
-    FunctionCallee MSP = getOrInsertLibFunc(M, *TLI, LibFunc_memset_pattern16,
-                            Builder.getVoidTy(), Int8PtrTy, Int8PtrTy, IntIdxTy);
-    inferNonMandatoryLibFuncAttrs(M, FuncName, *TLI);
+    assert(DestAS == 0);
 
     // Otherwise we should form a memset_pattern16.  PatternValue is known to be
     // an constant array of 16-bytes.  Plop the value into a mergable global.
@@ -1118,7 +1113,9 @@ bool LoopIdiomRecognize::processLoopStridedStore(
                                             PatternValue, ".memset_pattern");
     GV->setUnnamedAddr(GlobalValue::UnnamedAddr::Global); // Ok to merge these.
     GV->setAlignment(Align(16));
-    NewCall = Builder.CreateCall(MSP, {BasePtr, GV, NumBytes});
+
+    NewCall = cast<CallInst>(
+        emitMemSetPattern16(BasePtr, GV, NumBytes, Builder, *DL, TLI));
 
     // Set the TBAA info if present.
     if (AATags.TBAA)
